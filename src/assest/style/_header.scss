@@ -1,0 +1,37 @@
+.header {
+  .navbar {
+    padding: 20px 0;
+    // @extend .d_flex_center;
+    // justify-content: space-between;
+  }
+  .navbar ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 20px;
+  }
+  .navbar ul li {
+    font-size: 18px;
+    line-height: normal;
+    color: #000;
+
+    .notification {
+      position: relative;
+      .Count {
+        @extend .d_flex_center;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        background: #990000;
+        color: #ffff;
+        font-size: 10px;
+        top: -15px;
+        right: -12px;
+      }
+    }
+  }
+  .navbar ul li a:hover {
+    color: blue;
+  }
+}

@@ -1,0 +1,53 @@
+.LandingPage {
+  .AllProduct {
+    @extend .d_flex_center;
+    @extend .align_items_start;
+    @extend .flex_wrap;
+    gap: 20px;
+    .productDetails {
+      width: 32%;
+      border: 1px solid #000;
+      .proImg {
+        overflow: hidden;
+        .thamImg {
+          @extend .d_block;
+          width: 100%;
+          height: 200px;
+          margin-bottom: 30px;
+          overflow: hidden;
+        }
+        .childImag {
+          @extend .d_block;
+          width: 80px;
+          height: 80px;
+        }
+        img {
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+      .proContent {
+        padding: 10px;
+      }
+    }
+  }
+  &.OrderPage {
+    .AllProduct {
+      margin-bottom: 30px;
+      .productDetails {
+        .proImg {
+          .thamImg {
+            height: 100px;
+            margin-bottom: 20px;
+          }
+        }
+        .proContent{
+          .price{
+            font-size: 24px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
