@@ -1,9 +1,11 @@
-import React from 'react'
+import Cookies from 'js-cookie'
+import React, { Suspense } from 'react'
 import { Navigate, Outlet, } from 'react-router-dom'
 
 const PublicRouter = () => {
-  const token = false
+  const token = Cookies.get('authset')
+  console.log(token)
 
-  return !token ? <Outlet /> : <Navigate to={'/'} />
+  return !token ? <Suspense><Outlet /></Suspense> : <Navigate to={'/'} />
 }
 export default PublicRouter

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
 import Header from '../component/Header'
 
 const Layout = () => {
@@ -7,7 +6,6 @@ const Layout = () => {
         <div className='layout' >
             <div className='container'>
                 <Header />
-                <Outlet />
             </div>
         </div>
     )

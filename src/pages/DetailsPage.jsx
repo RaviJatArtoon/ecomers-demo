@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Spin } from 'antd';
+import Header from '../component/Header';
 
 const DetailsPage = () => {
 
@@ -27,6 +28,7 @@ const DetailsPage = () => {
 
   return (
     <div className='LandingPage'>
+       <Header/>
       <div className='AllProduct'>
         {loader ? <div className='productDetails'>
           <div className='product'>

@@ -4,6 +4,7 @@ import { setRecipes, setRecipesMeal, setRecipesTag } from '../redux/Action';
 import Pagination from '../component/CustomPagination';
 import CustomPagination from '../component/CustomPagination';
 import { Spin } from 'antd';
+import Header from '../component/Header';
 
 
 const Recipes = () => {
@@ -89,6 +90,7 @@ const Recipes = () => {
   return (
     <div>
       <div className='LandingPage recipesPage'>
+      <Header/>
         <div className='container'>
           <div className='d_flex_center selectMenu'>
             <div className='drop_down'>

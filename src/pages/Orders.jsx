@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, } from 'react-router-dom';
+import Header from '../component/Header';
 
 const Orders = () => {
     const [orderList, setOrderList] = useState([]);
@@ -25,6 +26,7 @@ const Orders = () => {
 
     return (
         <div className='ordersPage'>
+             <Header/>
            <div className='allOrder'>
                 {orderList.map((product, index) => (
                     <div key={index} className='orderCard' onClick={() => orderDetails(product)}>

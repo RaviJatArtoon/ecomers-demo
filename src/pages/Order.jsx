@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Spin } from 'antd';
+import Header from '../component/Header';
 
 const Order = () => {
     const [blog, setBlog] = useState(null);
@@ -27,6 +28,7 @@ const Order = () => {
 
     return (
         <div className='orderPage'>
+             <Header/>
          {  loader ? <div className='allorderCard'>
                 {blog?.data.map((data, index) => (
                     <div key={index} className='orderCard'>

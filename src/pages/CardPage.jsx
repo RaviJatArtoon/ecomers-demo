@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { notificatio } from '../redux/Action';
 import { Spin } from 'antd';
+import Header from '../component/Header';
 
 const CardPage = () => {
   const [availableCartProducts, setAvailableCartProducts] = useState(false);
@@ -92,6 +93,7 @@ const CardPage = () => {
     <div>
       {availableCartProducts ? (
         <div className='LandingPage OrderPage'>
+           <Header/>
           <div className='container'>
           {loader ?   <div className='AllProduct'>
               {cartProducts.map((product) => (

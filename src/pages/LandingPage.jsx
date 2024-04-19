@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddToCart, Delete, Editpro, notificatio, setProducts } from '../redux/Action';
 import { useNavigate } from "react-router-dom";
 import { Spin } from 'antd';
+import Header from '../component/Header';
 
 const LandingPage = () => {
   const [loader, setLoader] = useState(false);
@@ -19,7 +20,6 @@ const LandingPage = () => {
     try {
       const res = await fetch(API);
       const data = await res.json();
-      console.log(data,'tttttttttttttttttttt')
       dispatch(setProducts(data?.products));
       setAddCartProducts(new Array(data?.products.length));
       setLoader(true)
@@ -79,7 +79,7 @@ const LandingPage = () => {
   return (
     <>
       <div className='LandingPage'>
-        {/* {products.length !== 0 ? */}
+        <Header/>
           <div className='container'>
 
             {loader ? <div className='AllProduct'>

@@ -12,12 +12,14 @@ import Order from "../pages/Order";
 import Recipes from "../pages/Recipes";
 import RecipesDetails from "../pages/RecipesDetails";
 import Login from "../pages/Login";
+import Dashbord from '../pages/Dashbord';
 
 const CommanRoute = () => {
     const render = () => {
         return (
             <>
                 <Route path={"/"} element={<Layout />}>
+                    <Route path={"/dashbord"} element={<Dashbord />} />
                     <Route path={"/login"} element={<Login />} />
                     <Route path={"/products"} element={<LandingPage />} />
                     <Route path={"/cart"} element={<CardPage />} />

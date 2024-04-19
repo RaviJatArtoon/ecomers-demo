@@ -1,6 +1,7 @@
 import { Spin } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Header from '../component/Header';
 
 const RecipesDetails = () => {
   const { id } = useParams();
@@ -28,6 +29,7 @@ const RecipesDetails = () => {
 
   return (
     <div className='LandingPage paginationPage'>
+       <Header/>
       <div className='pages'>
         <div className="AllProduct allrecipes">
          {loader ?

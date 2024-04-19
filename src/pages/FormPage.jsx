@@ -4,6 +4,7 @@ import TextArea from 'antd/es/input/TextArea';
 import { useNavigate, useParams, useLocation, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Spin } from 'antd';
+import Header from '../component/Header';
 
 const FormPage = () => {
   const { Option } = Select;
@@ -95,6 +96,7 @@ const FormPage = () => {
 
   return (
     <div className='formPage'>
+       <Header/>
       <div className='container'>
        {loader ? <div className='formArea'>
           <Form
