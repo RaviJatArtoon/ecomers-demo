@@ -1,16 +1,28 @@
 import React from 'react'
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Dropdown, Space, Typography} from 'antd';
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'sonner';
+import { DownOutlined } from '@ant-design/icons';
 
-
+const items = [
+  {
+    key: 'Admin',
+    label: 'Admin',
+  },
+  {
+    key: 'Users',
+    label: 'Users',
+  },
+]
 
 const Login = () => {
   const navigate = useNavigate();
   const onFinish = async (values) => {
     // console.log('Success:', values);
     const username = 'kminchelle'
-    if (values.username === username) {
+    const password = '0lelplR'
+    if (values.username === username && values.password === password) {
       const creattoken = 'https://dummyjson.com/auth/login';
       const postData = { username: values.username, password: values.password, expiresInMins: 30, };
       try {
@@ -25,12 +37,14 @@ const Login = () => {
         const getingtoken = tokendata.token
         const settoken = Cookies.set('authset', getingtoken)
         navigate('/dashbord')
-
+        toast.success('Event has been created')
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    }else{
+    } else {
       console.log('user not found')
+      toast.error('Event has not been created')
+
     }
   };
 
@@ -84,6 +98,21 @@ const Login = () => {
           >
             <Input.Password />
           </Form.Item>
+
+          <Dropdown
+            menu={{
+              items,
+              selectable: true,
+              defaultSelectedKeys: ['3'],
+            }}
+          >
+            <Typography.Link>
+              <Space>
+                Selectable
+                <DownOutlined />
+              </Space>
+            </Typography.Link>
+          </Dropdown>
 
           <Form.Item
             wrapperCol={{

@@ -5,6 +5,7 @@ import { useNavigate, useParams, useLocation, useSearchParams } from 'react-rout
 import axios from 'axios';
 import { Spin } from 'antd';
 import Header from '../component/Header';
+import { toast } from 'sonner';
 
 const FormPage = () => {
   const { Option } = Select;
@@ -35,6 +36,7 @@ const FormPage = () => {
       })
         .then((response) => {
           console.log(response);
+          toast.success('Event has been created')
         })
         .catch((error) => {
           console.log(error);
@@ -57,6 +59,7 @@ const FormPage = () => {
       const SingleData = await res.json();
       setEditdata(SingleData)
       setLoader(true)
+      toast.success('Event has been created')
     } catch (error) {
       console.log('Error fetching data:', error)
     }

@@ -4,6 +4,7 @@ import { lazy } from "react";
 
 
 
+const HomePage = lazy(() => import("../pages/HomePage"));
 const Dashbord = lazy(() => import("../pages/Dashbord"));
 const EditPage = lazy(() => import("../pages/EditPage"));
 const SignUp = lazy(() => import("../pages/SignUp"));
@@ -68,6 +69,11 @@ export const privateRouteList = [
     path: "/edit",
     element: EditPage,
   },
+  {
+    title: "Home",
+    path: "/",
+    element: HomePage,
+  },
 ];
 
 export const publicRouteList = [
@@ -80,5 +86,10 @@ export const publicRouteList = [
     title: "Login",
     path: "/login",
     element: Login,
+  },
+  {
+    title: "Home",
+    path: "/",
+    element: HomePage,
   },
 ];

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Spin } from 'antd';
 import Header from '../component/Header';
+import { Toaster, toast } from 'sonner'
 
 const DetailsPage = () => {
 
@@ -16,6 +17,7 @@ const DetailsPage = () => {
       const data = await res.json();
       setDetailsProduct(data);
       setLoader(true)
+      toast.success('Event has been created')
     } catch (error) {
       console.error(error)
     }

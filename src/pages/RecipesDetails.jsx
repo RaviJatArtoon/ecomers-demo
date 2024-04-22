@@ -2,6 +2,7 @@ import { Spin } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from '../component/Header';
+import { toast } from 'sonner';
 
 const RecipesDetails = () => {
   const { id } = useParams();
@@ -16,6 +17,7 @@ const RecipesDetails = () => {
       const data = await res.json();
       setSingleRecipe(data);
       setLoader(true)
+      toast.success('Event has been created')
     } catch (error) {
       console.error(error)
     }

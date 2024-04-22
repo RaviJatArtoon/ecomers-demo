@@ -5,6 +5,7 @@ import Pagination from '../component/CustomPagination';
 import CustomPagination from '../component/CustomPagination';
 import { Spin } from 'antd';
 import Header from '../component/Header';
+import { toast } from 'sonner';
 
 
 const Recipes = () => {
@@ -22,7 +23,7 @@ const Recipes = () => {
       const data = await response.json();
       dispatch(setRecipes(data?.recipes))
       setLoader(true)
-
+      toast.success('Event has been created')
     } catch (error) {
       console.log('There was an error', error);
     }

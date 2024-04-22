@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { notificatio, setProducts, setRecipes } from '../redux/Action';
+import Cookies from 'js-cookie';
 
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate =  useNavigate();
   const { CartCount } = useSelector((state) => state.todos);
   const [cart, setCart] = useState([])
   const [countCard, setCountCard] = useState(0)
@@ -50,11 +52,14 @@ const Header = () => {
     }
   };
   
-  useEffect(() => {
+  const handlelogOut = (key) => {
+    Cookies.remove('authset');
+    navigate('/login');
+  }
 
+  useEffect(() => {
     fatchsearchdata()
     fatchsearchrecipe()
-
   }, [serchtext])
 
 
@@ -82,6 +87,7 @@ const Header = () => {
               </Link>
             </li>
             <li><Link to="/products/product" className='btn'>Add</Link> </li>
+            <li><Link  className='btn' onClick={handlelogOut}>logOut</Link> </li>
           </ul>
         </div>
       </div>
