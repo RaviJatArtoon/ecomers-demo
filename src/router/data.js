@@ -1,8 +1,5 @@
 import { lazy } from "react";
-
-
-
-
+import { ROLE } from "./RollBasRoute";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const Dashbord = lazy(() => import("../pages/Dashbord"));
@@ -18,61 +15,82 @@ const FormPage = lazy(() => import("../pages/FormPage"));
 const DetailsPage = lazy(() => import("../pages/DetailsPage"));
 const RecipesDetails = lazy(() => import("../pages/RecipesDetails"));
 
+const UnAuthorized = lazy(() => import("../pages/UnAuthorized"));
+
+const { ADMIN, USERS } = ROLE;
+
 export const privateRouteList = [
   {
     title: "Dashbord",
     path: "/dashbord",
     element: Dashbord,
+    allowRoll: [ADMIN,USERS],
   },
   {
     title: "products",
     path: "/products",
     element: LandingPage,
+    allowRoll: [ADMIN,USERS],
   },
   {
     title: "cart",
     path: "/cart",
     element: CardPage,
+    allowRoll: [ADMIN,USERS],
   },
   {
     title: "orders",
     path: "/orders",
     element: Orders,
+    allowRoll: [ADMIN,USERS],
   },
   {
     title: "order",
     path: "/order/orders/:id",
     element: Order,
+    allowRoll: [ADMIN,USERS],
   },
   {
     title: "recipes",
     path: "/recipes",
     element: Recipes,
+    allowRoll: [ADMIN,USERS],
   },
   {
     title: "addproduct",
     path: "/products/product",
     element: FormPage,
+    allowRoll: [ADMIN],
   },
   {
     title: "detailsPage",
     path: "/products/details/:id",
     element: DetailsPage,
+    allowRoll: [ADMIN,USERS],
   },
   {
     title: "reasipesDetails",
     path: "/recipes/details/:id",
     element: RecipesDetails,
+    allowRoll: [ADMIN,USERS],
   },
   {
     title: "EditPage",
     path: "/edit",
     element: EditPage,
+    allowRoll: [ADMIN]
   },
+  // {
+  //   title: "Home",
+  //   path: "/",
+  //   element: HomePage,
+  //   allowRoll: [ADMIN,USERS],
+  // },
   {
-    title: "Home",
-    path: "/",
-    element: HomePage,
+    title: "unauthorized",
+    path: "/unauthorized",
+    element: UnAuthorized,
+    allowRoll: [ADMIN,USERS],
   },
 ];
 
@@ -81,11 +99,13 @@ export const publicRouteList = [
     title: "Sign Up",
     path: "/signup",
     element: SignUp,
+   
   },
   {
     title: "Login",
     path: "/login",
     element: Login,
+  
   },
   {
     title: "Home",

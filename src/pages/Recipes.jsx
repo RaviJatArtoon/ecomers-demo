@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 
 const Recipes = () => {
   const [loader, setLoader] = useState(false);
+  const [loginView, setLoginView] = useState(false)
 
   const dispatch = useDispatch();
   const { recipes, recipesTag, mealType } = useSelector((state) => state.todos);
@@ -23,6 +24,7 @@ const Recipes = () => {
       const data = await response.json();
       dispatch(setRecipes(data?.recipes))
       setLoader(true)
+      setLoginView(true)
       toast.success('Event has been created')
     } catch (error) {
       console.log('There was an error', error);
@@ -91,7 +93,7 @@ const Recipes = () => {
   return (
     <div>
       <div className='LandingPage recipesPage'>
-      <Header/>
+      <Header loginView={loginView} />
         <div className='container'>
           <div className='d_flex_center selectMenu'>
             <div className='drop_down'>

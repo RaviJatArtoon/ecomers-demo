@@ -13,6 +13,7 @@ import Recipes from "../pages/Recipes";
 import RecipesDetails from "../pages/RecipesDetails";
 import Login from "../pages/Login";
 import Dashbord from '../pages/Dashbord';
+import UnAuthorized from '../pages/UnAuthorized';
 
 const CommanRoute = () => {
     const render = () => {
@@ -30,6 +31,7 @@ const CommanRoute = () => {
                     <Route path={`/order/orders/:id`} element={<Order />} />
                     <Route path={`/recipes`} element={<Recipes />} />
                     <Route path={`/recipes/details/:id`} element={<RecipesDetails />} />
+                    <Route path={`/unauthorized`} element={<UnAuthorized />} />
                 </Route>
             </>
         );

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { notificatio } from '../redux/Action';
 import { Spin } from 'antd';
 import Header from '../component/Header';
+import Cookies from 'js-cookie';
 
 const CardPage = () => {
   const [availableCartProducts, setAvailableCartProducts] = useState(false);
@@ -25,7 +26,7 @@ const CardPage = () => {
     const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
     setCartProducts(cartItems.map(item => ({ ...item, quantity: 1 })));
     setAvailableCartProducts(cartItems.length > 0);
-    console.log("cartItems", cartItems)
+    // console.log("cartItems", cartItems)
     setLoader(true)
   };
 
@@ -63,18 +64,52 @@ const CardPage = () => {
   };
 
   const checkOut = (productId) => {
-    console.log('checkOut', productId)
+    // console.log('checkOut', productId)
     //  navigate(`/orders?id=${productId}`)
+
+    // Get user details from localStorage
+    const userdetails = localStorage.getItem('UserData');
+    const userdata = userdetails ? JSON.parse(userdetails) : null;
+    const validData = userdata ? userdata.map(user => user.Email) : [];
+
+    // Get user details from cookie
+    const userDetailsCookie = Cookies.get('userDetails');
+    const cookiedata = userDetailsCookie ? JSON.parse(userDetailsCookie) : null;
+    const matchemailName = cookiedata?.Email;
+
+
+
     navigate(`/orders`)
     const oldorder = JSON.parse(localStorage.getItem('orders')) || [];
 
-    const orederDetail = { data: productId, id: uuidv4() }
+    const orederDetail = { data: productId, id: uuidv4(), matchemailName }
     const updateorder = [...oldorder, orederDetail];
     localStorage.setItem('orders', JSON.stringify(updateorder));
     setOrders(updateorder);
     localStorage.removeItem('cart');
     dispatch(notificatio(cart));
     setLoader(true)
+
+
+
+
+    // Check if both localStorage and cookie have data
+    // if (validData.length > 0 && cookiedata) {
+    //   // Find matching user based on email and password
+    //   const matchValue = validData.find(userData =>
+    //     userData.email === cookiedata.Email && userData.password === cookiedata.password
+    //   );
+
+    //   if (matchValue) {
+    //     console.log('User from localStorage and cookie matched:', matchValue);
+    //   } else {
+    //     console.log('User from localStorage and cookie did not match.');
+    //   }
+    // } else {
+    //   console.log('User data not found in localStorage or cookie.');
+    // }
+
+
   }
 
   useEffect(() => {
@@ -93,9 +128,9 @@ const CardPage = () => {
     <div>
       {availableCartProducts ? (
         <div className='LandingPage OrderPage'>
-           <Header/>
+          <Header />
           <div className='container'>
-          {loader ?   <div className='AllProduct'>
+            {loader ? <div className='AllProduct'>
               {cartProducts.map((product) => (
                 <div className='productDetails' key={product.id}>
                   <div className='product'>
@@ -116,14 +151,14 @@ const CardPage = () => {
                 </div>
               ))}
             </div>
-            :
-            <div className='loder'>
-              <Spin />
-            </div>
+              :
+              <div className='loder'>
+                <Spin />
+              </div>
             }
             <hr />
             <h2 className='subtotle'>Sub Total <span>{itemTotal}</span></h2>
-           {!deletePro && <Button type="primary" onClick={() => checkOut(cartProducts)}> Check-Out </Button>}
+            {!deletePro && <Button type="primary" onClick={() => checkOut(cartProducts)}> Check-Out </Button>}
           </div>
         </div>
       ) : (

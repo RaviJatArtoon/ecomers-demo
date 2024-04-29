@@ -8,7 +8,7 @@ const Order = () => {
     const [loader, setLoader] = useState(false);
 
     const { id } = useParams();
-    console.log(id, 'blogblogblogblogblogblogblogblog')
+    // console.log(id, 'blogblogblogblogblogblogblogblog')
 
     const showblog = () => {
         const suborders = JSON.parse(localStorage.getItem('orders')) || [];

@@ -5,7 +5,7 @@ import { notificatio, setProducts, setRecipes } from '../redux/Action';
 import Cookies from 'js-cookie';
 
 
-const Header = () => {
+const Header = ({loginView}) => {
   const dispatch = useDispatch();
   const navigate =  useNavigate();
   const { CartCount } = useSelector((state) => state.todos);
@@ -13,6 +13,9 @@ const Header = () => {
   const [countCard, setCountCard] = useState(0)
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   const [serchtext, setSerchText] = useState()
+ 
+
+  
 
   const Notification = () => {
     setCountCard(cartItems.length);
@@ -54,13 +57,21 @@ const Header = () => {
   
   const handlelogOut = (key) => {
     Cookies.remove('authset');
+    Cookies.remove('userDetails');
     navigate('/login');
+    // localStorage.removeItem('rolebas')
+    // localStorage.removeItem('orders')
   }
 
   useEffect(() => {
     fatchsearchdata()
     fatchsearchrecipe()
   }, [serchtext])
+
+  const roledataStr = localStorage.getItem('rolebas')
+  const roledata = roledataStr ? JSON.parse(roledataStr) : null;
+  const roleOfType = roledata ? roledata.roleOfType : null;
+  // console.log(roleOfType,'lroledataStrroledataStr')
 
 
   return (
@@ -86,8 +97,9 @@ const Header = () => {
                 </div>
               </Link>
             </li>
-            <li><Link to="/products/product" className='btn'>Add</Link> </li>
-            <li><Link  className='btn' onClick={handlelogOut}>logOut</Link> </li>
+            {/* <li><Link to="/products/product" className='btn'>Add</Link> </li> */}
+            {roleOfType === 'Admin' && <li><Link to="/products/product" className='btn'>Add</Link> </li>}
+              <li><Link  className='btn' onClick={handlelogOut}> {loginView ? 'logOut' : 'login'}</Link> </li>
           </ul>
         </div>
       </div>

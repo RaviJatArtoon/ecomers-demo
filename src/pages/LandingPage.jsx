@@ -5,16 +5,30 @@ import { useNavigate } from "react-router-dom";
 import { Spin } from 'antd';
 import Header from '../component/Header';
 import { Toaster, toast } from 'sonner'
+import { Value } from 'sass';
 
 const LandingPage = () => {
   const [loader, setLoader] = useState(false);
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { CartCount, products } = useSelector((state) => state.todos);
   // const [Products, setProductsAPI] = useState([]);
   const [cart, setCart] = useState([]);
   const [addCartProducts, setAddCartProducts] = useState([]);
+  const [loginView, setLoginView] = useState(false)
+  
+
+
+  // Retrieve data from localStorage
+  const roledataStr = localStorage.getItem('rolebas');
+  const roledata = roledataStr ? JSON.parse(roledataStr) : null;
+
+  // Access a specific property from the roledata object
+  const roleOfType = roledata ? roledata.roleOfType : null;
+
+  // console.log(roleOfType, 'Username from rolebas');
+
 
   let API = 'https://dummyjson.com/products';
 
@@ -25,6 +39,7 @@ const LandingPage = () => {
       dispatch(setProducts(data?.products));
       setAddCartProducts(new Array(data?.products.length));
       setLoader(true)
+      setLoginView(true)
       toast.success('Event has been created')
 
     } catch (error) {
@@ -83,7 +98,7 @@ const LandingPage = () => {
   return (
     <>
       <div className='LandingPage'>
-        <Header />
+        <Header  loginView={loginView}/>
         <div className='container'>
 
           {loader ? <div className='AllProduct'>
@@ -117,7 +132,8 @@ const LandingPage = () => {
                     {addCartProducts[index] && <button className='btn delete' onClick={() => handleGoCart(product)}>Go to Cart</button>}
                   </div>
                   <div className='formGroup d_flex_center gap_20'>
-                    <button className='btn Edit' onClick={() => handleEdit(product.id)}>Edit</button>
+                    {/* <button className='btn Edit' onClick={() => handleEdit(product.id)}>Edit</button> */}
+                    {roleOfType === 'Admin' && <button className='btn Edit' onClick={() => handleEdit(product.id)}>Edit</button>}
                     <button className='btn delete' onClick={() => handleDelete(product.id)}>Delete</button>
                   </div>
                 </div>

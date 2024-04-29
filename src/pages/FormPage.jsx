@@ -12,6 +12,7 @@ const FormPage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
+  const [loginView, setLoginView] = useState(false)
 
   const [searchParams,] = useSearchParams();
 
@@ -37,6 +38,7 @@ const FormPage = () => {
         .then((response) => {
           console.log(response);
           toast.success('Event has been created')
+          
         })
         .catch((error) => {
           console.log(error);
@@ -94,12 +96,12 @@ const FormPage = () => {
       category: editdata?.category
     });
      setLoader(true)
-
+     setLoginView(true)
   }, [editdata])
 
   return (
     <div className='formPage'>
-       <Header/>
+       <Header loginView={loginView}/>
       <div className='container'>
        {loader ? <div className='formArea'>
           <Form
